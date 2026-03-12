@@ -828,41 +828,18 @@ const ArchitectureSection = () => {
 };
 
 /* ─── MODELS SECTION ─────────────────────────────────────────── */
-const ModelsSection = () => {
-  const models=[
-    {name:"Gemini 2.5 Flash Live", role:"Voice Agent", desc:"Bidirectional audio stream with real-time TTS", channels:["📞 Voice"],color:"#e8764a"},
-    {name:"Gemini 3 Flash",role:"Text Agent",  desc:"Main agent for SMS + Email with BuiltInPlanner and MEDIUM thinking",channels:["💬 SMS","📧 Email"],color:"#c9a84c"},
-  ];
-  return (
+const ModelsSection = () => (
     <section id="models" style={{padding:"100px 64px"}}>
       <div className="divider" style={{marginBottom:72}}/>
       <div style={{textAlign:"center",marginBottom:56}}>
         <div className="sec-eyebrow">AI Infrastructure</div>
         <h2 className="sec-title">Powered by <span className="gold">Gemini</span></h2>
-        <p className="sec-desc" style={{margin:"16px auto 0"}}>The right model for every task, with automatic fallback and retry logic built-in.</p>
-      </div>
-      <div style={{maxWidth:900,margin:"0 auto",display:"flex",flexDirection:"column",gap:10}}>
-        {models.map((m,i)=>(
-          <div key={m.name} className="card model-card" style={{padding:"18px 24px",display:"flex",alignItems:"center",gap:20,opacity:0,animation:`fadeUp .5s ${.08*i}s ease forwards`}}>
-            <div style={{width:4,height:52,borderRadius:2,background:m.color,flexShrink:0}}/>
-            <div style={{flex:1}}>
-              <div style={{fontFamily:"'DM Mono',monospace",fontSize:".72rem",color:m.color,fontWeight:500}}>{m.name}</div>
-              <div style={{fontSize:".68rem",color:"var(--text)",marginTop:3}}>{m.desc}</div>
-            </div>
-            <div className="model-card-right" style={{textAlign:"right",flexShrink:0}}>
-              <div style={{fontFamily:"'Cinzel',serif",fontSize:".64rem",color:"var(--text2)",letterSpacing:".1em",textTransform:"uppercase"}}>{m.role}</div>
-              <div className="model-card-channels" style={{display:"flex",gap:5,marginTop:6,justifyContent:"flex-end"}}>
-                {m.channels.map(c=>(
-                  <span key={c} style={{fontFamily:"'DM Mono',monospace",fontSize:".54rem",padding:"2px 8px",borderRadius:12,border:`1px solid ${m.color}35`,color:m.color,background:`${m.color}0d`}}>{c}</span>
-                ))}
-              </div>
-            </div>
-          </div>
-        ))}
+        <p className="sec-desc" style={{margin:"16px auto 0",maxWidth:640}}>
+          Our Google partnership grants early access to unreleased Gemini models, delivering a 6-month+ technological edge.
+        </p>
       </div>
     </section>
-  );
-};
+);
 
 /* ─── CTA SECTION ────────────────────────────────────────────── */
 const CTASection = ({ onTestClick }) => (
