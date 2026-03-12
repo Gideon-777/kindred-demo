@@ -360,6 +360,63 @@ const GlobalStyles = () => (
       display: flex; align-items: center; justify-content: space-between;
     }
     .footer-logo { font-family: 'Cinzel', serif; font-size: 1rem; font-weight: 700; color: var(--gold2); letter-spacing: .2em; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      .hero { padding: 100px 32px 60px; }
+      .hero-stats { gap: 36px; }
+      section { padding-left: 32px !important; padding-right: 32px !important; }
+      nav { padding: 0 24px; }
+      footer { padding: 40px 24px; }
+    }
+
+    @media (max-width: 768px) {
+      nav { padding: 0 16px; height: 56px; }
+      .nav-links { display: none; }
+
+      .hero { padding: 90px 20px 50px; min-height: auto; }
+      .hero-title { font-size: clamp(2.2rem, 10vw, 3.5rem); }
+      .hero-subtitle { font-size: .95rem; }
+      .hero-stats { flex-direction: column; gap: 20px; align-items: center; }
+      .hero-stat-num { font-size: 1.6rem; }
+      .hero-cta-row { flex-direction: column; gap: 10px; align-items: stretch; }
+      .hero-cta-row .btn-test-main,
+      .hero-cta-row .btn-secondary { width: 100%; justify-content: center; text-align: center; }
+      .hero-scroll { display: none; }
+
+      section { padding-left: 20px !important; padding-right: 20px !important; }
+      .sec-title { font-size: clamp(1.4rem, 6vw, 2rem); }
+      .sec-desc { font-size: .88rem; }
+
+      .platform-grid { grid-template-columns: 1fr !important; }
+      .channel-grid { grid-template-columns: 1fr !important; }
+      .arch-main-grid { grid-template-columns: 1fr !important; }
+      .arch-cap-grid { grid-template-columns: 1fr !important; }
+
+      .agent-tabs { flex-wrap: wrap; justify-content: center; }
+      .agent-tab { padding: 8px 14px; font-size: .6rem; }
+
+      .model-card { flex-direction: column; align-items: flex-start !important; gap: 10px !important; }
+      .model-card-right { text-align: left !important; }
+      .model-card-channels { justify-content: flex-start !important; }
+
+      .cta-buttons { flex-direction: column; align-items: stretch; }
+      .cta-badges { gap: 20px !important; }
+
+      footer { flex-direction: column; gap: 16px; text-align: center; }
+      footer > div:last-child { flex-direction: column; gap: 10px; align-items: center; }
+
+      .modal-box { padding: 36px 24px 32px; }
+      .modal-number { font-size: 1.6rem; }
+    }
+
+    @media (max-width: 480px) {
+      section { padding-left: 14px !important; padding-right: 14px !important; }
+      .hero { padding: 80px 14px 40px; }
+      .hero-title { font-size: clamp(1.8rem, 10vw, 2.5rem); }
+      .sec-title { font-size: 1.3rem; }
+      .hero-eyebrow { font-size: .58rem; padding: 5px 12px; }
+    }
   `}</style>
 );
 
@@ -626,7 +683,7 @@ const PlatformOverview = () => (
         from first ring to resolved work order — with zero human intervention required.
       </p>
     </div>
-    <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:20,maxWidth:1200,margin:"0 auto"}}>
+    <div className="platform-grid" style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:20,maxWidth:1200,margin:"0 auto"}}>
       {Object.entries(AGENTS).map(([key,ag])=>(
         <div key={key} className="card" style={{padding:28,borderColor:ag.border,background:ag.accent}}>
           <div style={{fontSize:"2rem",marginBottom:16}}>{ag.icon}</div>
@@ -659,7 +716,7 @@ const ChannelSection = () => {
         <div className="sec-eyebrow">Channels</div>
         <h2 className="sec-title">Every Channel. <span className="gold">One Brain.</span></h2>
       </div>
-      <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:20,maxWidth:1100,margin:"0 auto"}}>
+      <div className="channel-grid" style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:20,maxWidth:1100,margin:"0 auto"}}>
         {channels.map((ch,i)=>(
           <div key={ch.name} className="card" style={{padding:28,borderColor:`${ch.color}30`,opacity:0,animation:`fadeUp .6s ${.1*i}s ease forwards`}}>
             <div style={{fontSize:"2.2rem",marginBottom:14}}>{ch.icon}</div>
@@ -701,7 +758,7 @@ const ArchitectureSection = () => {
         <p className="sec-desc" style={{margin:"16px auto 0"}}>Each agent runs on Google ADK with Gemini Live, modular channel instances, and purpose-engineered tool suites.</p>
       </div>
 
-      <div style={{display:"flex",justifyContent:"center",gap:10,marginBottom:40}}>
+      <div className="agent-tabs" style={{display:"flex",justifyContent:"center",gap:10,marginBottom:40}}>
         {Object.entries(AGENTS).map(([key,a])=>(
           <button key={key} className={`agent-tab${tab===key?" active":""}`}
             style={tab===key?{borderColor:a.color,color:a.color,background:`${a.color}12`}:{}}
@@ -716,7 +773,7 @@ const ArchitectureSection = () => {
           <div style={{fontFamily:"'Cinzel',serif",fontSize:"1.35rem",fontWeight:600,color:ag.color,letterSpacing:".06em",opacity:0,animation:"fadeUp .4s ease forwards"}}>{ag.tagline}</div>
         </div>
 
-        <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:20}}>
+        <div className="arch-main-grid" style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:20}}>
           {/* LAYERS */}
           <div style={{display:"flex",flexDirection:"column",gap:0}}>
             {ag.layers.map((layer,li)=>(
@@ -738,7 +795,7 @@ const ArchitectureSection = () => {
           <div style={{display:"flex",flexDirection:"column",gap:14}}>
             <div style={{border:`1px solid ${ag.border}`,borderRadius:8,padding:"18px 20px",background:ag.accent}}>
               <div style={{fontFamily:"'DM Mono',monospace",fontSize:".55rem",letterSpacing:".2em",textTransform:"uppercase",color:ag.color,marginBottom:14}}>Key Capabilities</div>
-              <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:8}}>
+              <div className="arch-cap-grid" style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:8}}>
                 {ag.features.map((f,i)=>(
                   <div key={f.label} style={{display:"flex",alignItems:"center",gap:8,padding:"8px 10px",borderRadius:5,border:`1px solid ${f.color}20`,background:`${f.color}07`,opacity:0,animation:`fadeUp .4s ${.06*i}s ease forwards`}}>
                     <span style={{fontSize:"1rem"}}>{f.icon}</span>
@@ -786,15 +843,15 @@ const ModelsSection = () => {
       </div>
       <div style={{maxWidth:900,margin:"0 auto",display:"flex",flexDirection:"column",gap:10}}>
         {models.map((m,i)=>(
-          <div key={m.name} className="card" style={{padding:"18px 24px",display:"flex",alignItems:"center",gap:20,opacity:0,animation:`fadeUp .5s ${.08*i}s ease forwards`}}>
+          <div key={m.name} className="card model-card" style={{padding:"18px 24px",display:"flex",alignItems:"center",gap:20,opacity:0,animation:`fadeUp .5s ${.08*i}s ease forwards`}}>
             <div style={{width:4,height:52,borderRadius:2,background:m.color,flexShrink:0}}/>
             <div style={{flex:1}}>
               <div style={{fontFamily:"'DM Mono',monospace",fontSize:".72rem",color:m.color,fontWeight:500}}>{m.name}</div>
               <div style={{fontSize:".68rem",color:"var(--text)",marginTop:3}}>{m.desc}</div>
             </div>
-            <div style={{textAlign:"right",flexShrink:0}}>
+            <div className="model-card-right" style={{textAlign:"right",flexShrink:0}}>
               <div style={{fontFamily:"'Cinzel',serif",fontSize:".64rem",color:"var(--text2)",letterSpacing:".1em",textTransform:"uppercase"}}>{m.role}</div>
-              <div style={{display:"flex",gap:5,marginTop:6,justifyContent:"flex-end"}}>
+              <div className="model-card-channels" style={{display:"flex",gap:5,marginTop:6,justifyContent:"flex-end"}}>
                 {m.channels.map(c=>(
                   <span key={c} style={{fontFamily:"'DM Mono',monospace",fontSize:".54rem",padding:"2px 8px",borderRadius:12,border:`1px solid ${m.color}35`,color:m.color,background:`${m.color}0d`}}>{c}</span>
                 ))}
@@ -830,12 +887,12 @@ const CTASection = ({ onTestClick }) => (
       </div>
     </div>
 
-    <div style={{display:"flex",gap:14,justifyContent:"center"}}>
+    <div className="cta-buttons" style={{display:"flex",gap:14,justifyContent:"center"}}>
       <button className="btn-test-main" onClick={onTestClick}><span>📞</span> Call Kindred Now</button>
       <button className="btn-secondary">View Docs</button>
     </div>
 
-    <div style={{marginTop:64,display:"flex",justifyContent:"center",gap:48,flexWrap:"wrap"}}>
+    <div className="cta-badges" style={{marginTop:64,display:"flex",justifyContent:"center",gap:48,flexWrap:"wrap"}}>
       {["Fair Housing Compliant","Multi-Client Architecture","Google ADK Native","MongoDB + Celery"].map(badge=>(
         <div key={badge} style={{fontFamily:"'DM Mono',monospace",fontSize:".62rem",letterSpacing:".14em",color:"var(--text2)",display:"flex",alignItems:"center",gap:8}}>
           <div style={{width:5,height:5,borderRadius:"50%",background:"var(--teal)"}}/>{badge}
